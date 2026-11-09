@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Campus Conecta - Dashboard</title>
+    <style>
+        body { font-family: 'Inter', sans-serif; margin: 0; display: flex; background-color: #F3F4F6; }
+        .sidebar { width: 250px; background: white; height: 100vh; border-right: 1px solid #E5E7EB; padding: 20px; box-sizing: border-box; }
+        .sidebar h3 { color: #1E3A8A; }
+        .sidebar a { display: block; padding: 10px 0; color: #374151; text-decoration: none; font-weight: 500; }
+        .sidebar a:hover { color: #2563EB; }
+        .content { flex-grow: 1; padding: 40px; }
+        .card { background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+<div class="sidebar">
+    <h3>Campus Conecta</h3>
+    <hr style="border:0; border-top:1px solid #E5E7EB;">
+    <a href="/dashboard">🏠 Inicio / Dashboard</a>
+    <a href="/biblioteca">📚 Biblioteca de PDFs</a>
+    <a href="/muro">💬 Muro Social & Skills</a>
+    <a href="/">🚪 Cerrar Sesión</a>
+</div>
+<div class="content">
+    <h1>Bienvenido al Panel Principal</h1>
+    <div class="card">
+        <h3>Resumen de Actividad</h3>
+        <p>Prototipo funcional en Java Spring Boot ejecutándose correctamente.</p>
+    </div>
+</div>
+</body>
+</html>

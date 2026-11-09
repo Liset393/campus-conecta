@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Campus Conecta - Login</title>
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #F3F4F6; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; }
+        .login-card { background: white; padding: 40px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); width: 350px; }
+        h2 { color: #1E3A8A; text-align: center; }
+        input { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #D1D5DB; border-radius: 4px; box-sizing: border-box; }
+        button { width: 100%; padding: 10px; background-color: #1E3A8A; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold; }
+        button:hover { background-color: #2563EB; }
+        .error { color: red; font-size: 12px; text-align: center; }
+    </style>
+</head>
+<body>
+<div class="login-card">
+    <h2>Campus Conecta</h2>
+    <p style="text-align: center; color: #6B7280; font-size: 14px;">Centro de conocimiento colaborativo</p>
+    <form action="/login" method="post">
+        <input type="email" name="email" placeholder="Correo institucional" required>
+        <input type="password" name="password" placeholder="Contraseña" required>
+        <button type="submit">Iniciar Sesión</button>
+    </form>
+    <p class="error" th:if="${error}" th:text="${error}"></p>
+</div>
+</body>
+</html>

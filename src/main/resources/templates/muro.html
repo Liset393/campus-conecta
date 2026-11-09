@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Campus Conecta - Muro Social</title>
+    <style>
+        body { font-family: 'Inter', sans-serif; margin: 0; display: flex; background-color: #F8FAFC; color: #1E293B; }
+        .sidebar { width: 250px; background: white; height: 100vh; border-right: 1px solid #E2E8F0; padding: 20px; box-sizing: border-box; position: fixed; }
+        .sidebar h3 { color: #1E3A8A; margin-top: 0; }
+        .sidebar a { display: block; padding: 10px 12px; margin: 4px 0; color: #475569; text-decoration: none; font-weight: 500; border-radius: 6px; transition: background 0.2s; }
+        .sidebar a:hover { background: #F1F5F9; color: #1E3A8A; }
+        .content { margin-left: 250px; flex-grow: 1; padding: 40px; box-sizing: border-box; max-width: 900px; }
+
+        .card { background: white; padding: 24px; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); border: 1px solid #E2E8F0; margin-bottom: 24px; }
+
+        textarea { width: 100%; padding: 14px; border: 1px solid #CBD5E1; border-radius: 8px; box-sizing: border-box; resize: vertical; height: 90px; margin-bottom: 12px; font-family: inherit; font-size: 14px; }
+        textarea:focus { outline: none; border-color: #2563EB; box-shadow: 0 0 0 3px rgba(37,99,235,0.1); }
+
+        .form-footer { display: flex; justify-content: space-between; align-items: center; }
+        select { padding: 8px 12px; border: 1px solid #CBD5E1; border-radius: 6px; background: white; font-size: 14px; color: #475569; }
+
+        .btn { background-color: #1E3A8A; color: white; padding: 10px 20px; border: none; border-radius: 6px; cursor: pointer; font-weight: 600; font-size: 14px; transition: background 0.2s; }
+        .btn:hover { background-color: #2563EB; }
+
+        .post { border-bottom: 1px solid #F1F5F9; padding-bottom: 20px; margin-bottom: 20px; }
+        .post:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+        .post-header { display: flex; align-items: center; margin-bottom: 8px; }
+        .avatar { width: 40px; height: 40px; background: #DBEAFE; color: #1E3A8A; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: bold; margin-right: 12px; }
+        .post-meta { display: flex; flex-direction: column; }
+        .post-author { font-weight: 600; color: #1E3A8A; font-size: 15px; }
+        .post-date { font-size: 12px; color: #94A3B8; }
+
+        .badge { display: inline-block; padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: 600; margin-bottom: 10px; }
+        .badge-skill { background: #FEF3C7; color: #B45309; }
+        .badge-academic { background: #E0E7FF; color: #3730A3; }
+
+        .post-content { color: #334155; font-size: 14px; line-height: 1.5; margin-bottom: 12px; }
+        .post-actions { display: flex; gap: 16px; font-size: 13px; color: #64748B; font-weight: 500; }
+        .post-actions span { cursor: pointer; transition: color 0.2s; }
+        .post-actions span:hover { color: #2563EB; }
+    </style>
+</head>
+<body>
+<div class="sidebar">
+    <h3>Campus Conecta</h3>
+    <hr style="border:0; border-top:1px solid #E2E8F0; margin: 15px 0;">
+    <a href="/dashboard">🏠 Inicio / Dashboard</a>
+    <a href="/biblioteca">📚 Biblioteca de PDFs</a>
+    <a href="/muro">💬 Muro Social & Skills</a>
+    <a href="/">🚪 Cerrar Sesión</a>
+</div>
+
+<div class="content">
+    <h1>Muro Social & Skills Exchange</h1>
+
+    <!-- Formulario funcional conectado al controlador -->
+    <div class="card">
+        <h3 style="margin-top:0; font-size: 16px; color: #1E293B;">¿Qué quieres compartir o preguntar hoy?</h3>
+        <form th:action="@{/muro/publicar}" method="post">
+            <textarea name="content" placeholder="Escribe tu consulta o ofrece un intercambio de habilidades..." required></textarea>
+            <div class="form-footer">
+                <select name="category">
+                    <option value="🚀 Skills Exchange">🚀 Skills Exchange</option>
+                    <option value="📚 Consulta Académica">📚 Consulta Académica</option>
+                </select>
+                <button type="submit" class="btn">Publicar</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Lista dinámica de publicaciones -->
+    <div class="card">
+        <div class="post" th:each="post : ${posts}">
+            <div class="post-header">
+                <div class="avatar" th:text="${#strings.substring(post.author, 0, 2)}">US</div>
+                <div class="post-meta">
+                    <span class="post-author" th:text="${post.author}">Autor</span>
+                    <span class="post-date" th:text="${post.date}">Fecha</span>
+                </div>
+            </div>
+            <span class="badge" th:classappend="${post.badgeClass}" th:text="${post.category}">Categoría</span>
+            <p class="post-content" th:text="${post.content}">Contenido del post...</p>
+            <div class="post-actions">
+                <span>👍 Me gusta</span>
+                <span>💬 Comentar</span>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
